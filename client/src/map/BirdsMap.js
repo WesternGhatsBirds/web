@@ -1,8 +1,15 @@
 import React from "react";
 import Plot from './Plot'
+import PropTypes from "prop-types";
+import AppConstants from "./../AppConstants.js";
+import BirdsMapConstants from "./BirdsMapConstants"
 const axios = require('axios');
 
 class BirdsMap extends React.Component {
+  static propTypes = {
+    source: PropTypes.string.isRequired
+  };
+
   constructor(props) {
     super(props);
 
@@ -12,38 +19,16 @@ class BirdsMap extends React.Component {
   }
 
   componentWillMount() {
-    axios.get('http://localhost:3001/map/data')
+    axios.get(AppConstants.SERVER_URL(this.props.source))
       .then((res) => {
         this.setState({data: res.data.data});
       });
   }
 
   render() {
-    let mapLayout = {
-      title: 'Birds of the Western Ghats',
-      autosize: true,
-      width: 1000,
-      height: 800,
-      margin: { l: 65, r: 50, b: 65, t: 90 },
-      geo: {
-        scope: 'india',
-        resolution: 50,
-        lataxis: { 'range': [0, 30] },
-        lonaxis: { 'range': [50, 100] },
-        showrivers: true,
-        rivercolor: '#fff',
-        showlakes: true,
-        lakecolor: '#fff',
-        showland: true,
-        landcolor: '#EAEAAE',
-        countrycolor: '#d3d3d3',
-        countrywidth: 1.5,
-        subunitcolor: '#d3d3d3'
-      }
-    };
     return (
       <div>
-        <Plot handle="map" data={this.state.data} layout={mapLayout}/>
+        <Plot handle="map" data={this.state.data} layout={BirdsMapConstants.LAYOUT}/>
       </div>
     );
   }

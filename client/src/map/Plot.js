@@ -17,7 +17,6 @@ class Plot extends React.Component {
     this.plot(this.props);
   }
 
-
   plot(props) {
     let handle = props.handle,
       data = props.data,
