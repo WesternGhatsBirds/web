@@ -21,14 +21,16 @@ app.get('/openingMessage', function (req, res) {
 
 app.get('/map/data', function (req, res) {
   res.send({
-    data: [
+    points: [
       {
-        lat: [12.976135, 13.976135],
-        lon: [77.592775, 78.592775],
-        text: ['First', 'Second'],
-        type: 'scattergeo',
-        mode: 'markers+text',
-        name: 'Points'
+        lat: 12.976135,
+        lon: 77.592775,
+        tag: "First"
+      },
+      {
+        lat: 13.976135,
+        lon: 78.592775,
+        tag: "Second"
       }
     ]
   })

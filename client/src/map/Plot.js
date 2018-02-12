@@ -26,7 +26,7 @@ class Plot extends React.Component {
 
   render() {
     return (
-      <div id={this.props.handle}>Plot</div>
+      <div id={this.props.handle}/>
     );
   }
 }

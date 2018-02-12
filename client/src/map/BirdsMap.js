@@ -14,14 +14,36 @@ class BirdsMap extends React.Component {
     super(props);
 
     this.state = {
-      data: []
+      data: [
+        {
+          lat: [],
+          lon: [],
+          text: [],
+          type: 'scattergeo',
+          mode: 'markers+text',
+        }
+      ]
     };
   }
 
   componentWillMount() {
     axios.get(AppConstants.SERVER_URL(this.props.source))
       .then((res) => {
-        this.setState({data: res.data.data});
+        let currentData = this.state.data;
+        let coordinatePoints = res.data.points;
+        let lats = [];
+        let lons = [];
+        let tags = [];
+        while (coordinatePoints.length > 0) {
+          let coordinate = coordinatePoints.pop();
+          lats.push(coordinate.lat);
+          lons.push(coordinate.lon);
+          tags.push(coordinate.tag);
+        }
+        currentData[0].lat = lats;
+        currentData[0].lon = lons;
+        currentData[0].text = tags;
+        this.setState({data: currentData});
       });
   }
 
