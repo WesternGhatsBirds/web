@@ -10,14 +10,13 @@ class Plot extends React.Component {
   };
 
   componentDidMount() {
-    console.log('IN COMPONENT DID MOUNT', this.props);
     this.plot(this.props);
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log('IN COMPONENT WILL RECEIVE PROPS', nextProps);
-    this.plot(nextProps);
+  componentDidUpdate(){
+    this.plot(this.props);
   }
+
 
   plot(props) {
     let handle = props.handle,
